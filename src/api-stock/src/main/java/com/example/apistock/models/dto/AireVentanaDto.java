@@ -1,10 +1,13 @@
 package com.example.apistock.models.dto;
 
+import com.example.apistock.models.entities.Center;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
 
 @Data
 @Builder
@@ -12,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AireVentanaDto {
 
+    private UUID id;
     private String numActivo;
     private String local;
     private String category;
@@ -24,4 +28,8 @@ public class AireVentanaDto {
     private String dateInstalacion;
     private String tecnicalStatus;
     private Integer levelPriority;
+    private Center center;
+
+  public AireVentanaDto(String numActivo, String local) {
+  }
 }

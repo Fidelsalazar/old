@@ -25,15 +25,24 @@
         <section>
           <div class="example-button-row">
             <div class="example-flex-container">
-              <button mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+              <button
+                mat-icon-button
+                aria-label="Editar"
+                (click)="openDialog(center, 'centro')"
+                >
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+              <button
+                mat-icon-button color="primary"
+                aria-label="Eliminar"
+                (click)="deleteCenter(center)"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
               <button
-                mat-icon-button disabled
-                (click)="abrirVentanaModal()"
+                mat-icon-button
+                (click)="openDialog(center, 'centro')"ç
+                disabled="true"
               >
                 <mat-icon>open_in_new</mat-icon>
               </button>
@@ -52,4 +61,6 @@
   >
   </mat-paginator>
 </div>
+
+
 

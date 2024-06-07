@@ -14,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI securityAPI() {
         return new OpenAPI()
-                .info(new Info().title("Model")
+                .info(new Info().title("API-Stock")
                         .description("API del Stock ")
                         .version("v1")
                         .contact(new Contact().name("").email("").url(""))

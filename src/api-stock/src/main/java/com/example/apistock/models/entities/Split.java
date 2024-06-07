@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table
+@Builder
 public class Split {
     @Id
     @Column(

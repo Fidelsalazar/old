@@ -1,0 +1,325 @@
+<h1 mat-dialog-title>Editar {{use}}</h1>
+
+<div #container></div>
+
+<!-- Plantillas -->
+
+<ng-template #editarCentro>
+  <div class="card flex flex-column md:flex-row gap-3">
+    <form
+      [formGroup] = "centerForm"
+      (ngSubmit)="sendCenterMod()"
+    >
+      <p-inputGroup>
+        <p-inputGroupAddon>
+          Centro
+        </p-inputGroupAddon>
+        <input
+          pInputText placeholder="Nombre del centro"
+          formControlName="nombreCentro"
+        />
+      </p-inputGroup>
+      <br/>
+      <p-inputGroup>
+          <p-inputGroupAddon>Sitio</p-inputGroupAddon>
+          <input
+            type="text"
+            pInputText
+            placeholder="Ubicacion del centro"
+            formControlName="ubicacionCentro"
+          />
+      </p-inputGroup>
+      <br/>
+      <div class="card flex justify-content-center button">
+        <p-button label="Cancelar" severity="danger"  (onClick)="close()"/>
+        <p-button type="submit" label="Enviar" />
+      </div>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #editarAire>
+  <div class="card flex flex-column md:flex-row gap-3">
+        <form
+          [formGroup] = "centerForm"
+          (ngSubmit)="sendCenterMod()"
+        >
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              # Activo
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Local
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Marca
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Model
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              País
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              V
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+            Refrigerante
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Capacidad
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Fecha de Intalación
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Estado Técnico
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+          <br/>
+          <p-inputGroup>
+            <p-inputGroupAddon>
+              Prioridad
+            </p-inputGroupAddon>
+            <input
+              pInputText placeholder="Nombre del centro"
+              formControlName="nombreCentro"
+            />
+          </p-inputGroup>
+
+          <div class="card flex justify-content-center button">
+            <p-button label="Cancelar" severity="danger"  (onClick)="close()"/>
+            <p-button type="submit" label="Enviar" />
+          </div>
+        </form>
+  </div>
+</ng-template>
+
+<ng-template #newAire>
+  <div class="card flex flex-column md:flex-row gap-3">
+        <form
+          [formGroup] = "centerForm"
+          (ngSubmit)="sendCenterCreate()"
+        >
+          <div class="formDist">
+            <div>
+
+              <div class="card flex justify-content-center">
+                <p-treeSelect
+                  class="md:w-20rem w-full"
+                  containerStyleClass="w-full"
+                  [(ngModel)]="selectedNodes"
+                  [options]="nodes"
+                  placeholder="Selecione un centro"
+                  formControlName="center"
+                />
+              </div>
+
+
+                <p-inputGroup>
+                  <p-inputGroupAddon>
+                    Fecha
+                  </p-inputGroupAddon>
+                  <p-calendar
+                    formControlName="dateI"
+                    placeholder="Fecha de Instalación"
+                    [showIcon]="true"
+                  ></p-calendar>
+                </p-inputGroup>
+
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  # Activo
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="numActivo"
+                />
+              </p-inputGroup>
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  Local
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="local"
+                />
+              </p-inputGroup>
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  Categoría
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="category"
+                />
+              </p-inputGroup>
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  Marca
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="marca"
+                />
+              </p-inputGroup>
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  Model
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="model"
+                />
+              </p-inputGroup>
+
+            </div>
+
+            <div class="rigth-container">
+
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  País
+                </p-inputGroupAddon>
+                <input
+                  pInputText placeholder="Nombre del centro"
+                  formControlName="country"
+                />
+              </p-inputGroup>
+              <br/>
+              <p-inputGroup>
+                <p-inputGroupAddon>
+                  V
+                </p-inputGroupAddon>
+                <input
+                  pInputText
+                  placeholder="V"
+                  formControlName="v"
+                />
+              </p-inputGroup>
+              <br/>
+                <p-inputGroup>
+                  <p-inputGroupAddon>
+                  Refrigerante
+                  </p-inputGroupAddon>
+                  <input
+                    pInputText placeholder="Nombre del centro"
+                    formControlName="refrigerante"
+                  />
+                </p-inputGroup>
+                <br/>
+                <p-inputGroup>
+                  <p-inputGroupAddon>
+                    Capacidad
+                  </p-inputGroupAddon>
+                  <input
+                    pInputText placeholder="Nombre del centro"
+                    formControlName="capacidad"
+                  />
+                </p-inputGroup>
+
+                <br/>
+                <p-inputGroup>
+                  <p-inputGroupAddon>
+                    Estado Técnico
+                  </p-inputGroupAddon>
+                  <input
+                    pInputText placeholder="Nombre del centro"
+                    formControlName="tecnicalS"
+                  />
+                </p-inputGroup>
+                <br/>
+                <p-inputGroup>
+                  <p-inputGroupAddon>
+                    Prioridad
+                  </p-inputGroupAddon>
+                  <input
+                    pInputText placeholder="Nombre del centro"
+                    formControlName="priority"
+                  />
+                </p-inputGroup>
+            </div>
+          </div>
+          <br/><br/>
+          <div class="card flex justify-content-center button">
+            <p-button label="Cancelar" severity="danger"  (onClick)="close()"/>
+            <p-button type="submit" label="Enviar" />
+          </div>
+          <br/>
+        </form>
+        <p-scrollTop target="parent" styleClass="custom-scrolltop" [threshold]="100" icon="pi pi-arrow-up" />
+  </div>
+</ng-template>
+

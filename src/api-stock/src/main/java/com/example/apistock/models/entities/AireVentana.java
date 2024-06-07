@@ -2,6 +2,7 @@ package com.example.apistock.models.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table
-public class AireVentana {
+@Builder
+public class fAireVentana {
     @Id
     @Column(
             name = "id",
@@ -53,6 +55,8 @@ public class AireVentana {
     @Column
     private Integer levelPriority;
 
-    @ManyToOne(targetEntity = Center.class)
+    @ManyToOne(
+      targetEntity = Center.class
+    )
     private  Center center;
 }

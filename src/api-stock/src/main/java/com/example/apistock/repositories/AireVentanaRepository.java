@@ -8,4 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface AireVentanaRepository extends JpaRepository<AireVentana, UUID> {
+
+  AireVentana findByNumActivo(String numActivo);
 }

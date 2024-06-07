@@ -13,4 +13,6 @@ public interface CenterService{
     List<CenterDto> getAllCenter() throws  Exception;
 
     CenterDto getCenterForId(UUID id) throws Exception;
+
+    String delete(UUID id) throws Exception;
 }

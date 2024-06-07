@@ -1,0 +1,89 @@
+<div class="mb-3">
+    <p-button
+        type="button"
+        icon="pi pi-chevron-left"
+        (click)="prev()"
+        [disabled]="isFirstPage()"
+        styleClass="p-button-text" />
+    <p-button
+        type="button"
+        icon="pi pi-refresh"
+        (click)="reset()"
+        styleClass="p-button-text" />
+    <p-button
+        type="button"
+        icon="pi pi-chevron-right"
+        (click)="next()"
+        [disabled]="isLastPage()"
+        styleClass="p-button-text" />
+</div>
+<div class="card">
+    <p-table
+        [value]="customers"
+        [paginator]="true"
+        [rows]="5"
+        [first]="first"
+        [showCurrentPageReport]="true"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        (onPage)="pageChange($event)"
+        [rowsPerPageOptions]="[10, 25, 50]"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+              <th style="width:25%"># Activo</th>
+              <th style="width:25%">Marca</th>
+              <th style="width:25%">Pais</th>
+              <th style="width:25%">Centro</th>
+              <th style="width:25%">Local</th>
+              <th style="width:10%"></th>
+              <th style="width:10%"></th>
+              <th style="width:10%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+            <tr>
+              <td>{{ customer.numActivo }}</td>
+              <td>{{ customer.local }}</td>
+              <td>{{ customer.marca }}</td>
+              <td>{{ customer.country }}</td>
+              <td>{{ customer.center.center }}</td>
+              <td>
+                <p-button
+                  [text]="true"
+                  (onClick)="openDialog(customer, 'Aire', 'create')"
+                >
+                  <span class="pi pi-pencil"></span>
+                </p-button>
+              </td>
+              <td>
+                <p-button
+                  [text]="true"
+                  (onClick)="deleteAire(customer)"
+                >
+                  <span class="pi pi-trash"></span>
+                </p-button>
+              </td>
+              <td>
+                <p-button
+                  [text]="true"
+                  (onClick)="openDialog(customer, 'Aire','edit')"
+                >
+                  <span class="pi pi-expand"></span>
+                </p-button>
+              </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="paginatorleft">
+            <p-button
+              type="button"
+              icon="pi pi-plus"
+              styleClass="p-button-text"
+              (onClick)="openDialog('create','Aire', 'new')"
+            />
+        </ng-template>
+        <ng-template pTemplate="paginatorright">
+            <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text" />
+        </ng-template>
+    </p-table>
+</div>

@@ -117,4 +117,16 @@ public class CenterServiceImpl implements CenterService{
             throw new Exception();
         }
     }
+
+    @Override
+    public String delete(UUID id) throws Exception {
+      try{
+        centerRepository.deleteById(id);
+        return null ;
+      }catch(Exception e) {
+        log.error(e.getMessage());
+        throw new Exception();
+      }
+
+    }
 }

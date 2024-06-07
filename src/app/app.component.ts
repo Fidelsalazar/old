@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TableComponent } from './components/table/table.component';
+import { routes } from './app.routes';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import { TableComponent } from './components/table/table.component';
   imports: [
     RouterOutlet,
     NavbarComponent,
-    TableComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

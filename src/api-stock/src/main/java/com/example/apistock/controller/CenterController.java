@@ -37,6 +37,7 @@ public class CenterController {
             @PathVariable UUID id,
             @RequestBody CenterDto update
     ) throws Exception{
+        log.info(String.valueOf(update));
         return new ResponseEntity<>(
                 centerService.modified(id,update),
                 HttpStatus.OK
@@ -55,10 +56,21 @@ public class CenterController {
     public ResponseEntity<CenterDto> getbyId(
             @PathVariable UUID id
     ) throws Exception{
+
         return new ResponseEntity<>(
                 centerService.getCenterForId(id),
                 HttpStatus.OK
         );
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(
+      @PathVariable UUID id
+    )throws Exception{
+      return  new ResponseEntity<>(
+        centerService.delete(id),
+        HttpStatus.OK
+      );
     }
 
 }
