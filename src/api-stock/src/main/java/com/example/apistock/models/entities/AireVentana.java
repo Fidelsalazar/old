@@ -14,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table
 @Builder
-public class fAireVentana {
+public class AireVentana {
     @Id
     @Column(
             name = "id",

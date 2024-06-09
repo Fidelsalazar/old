@@ -33,21 +33,35 @@
             <tr>
               <th style="width:25%"># Activo</th>
               <th style="width:25%">Marca</th>
+              <th style="width:10%">Modelo</th>
               <th style="width:25%">Pais</th>
+              <th style="width:10%">Categoria</th>
+              <th style="width:10%">V</th>
+              <th style="width:10%">Refrigerante</th>
+              <th style="width:10%">Capacidad</th>
+              <th style="width:10%">Fecha Instalación</th>
+              <th style="width:10%">Estado técnico</th>
+              <th style="width:10%">Prioridad</th>
               <th style="width:25%">Centro</th>
               <th style="width:25%">Local</th>
-              <th style="width:10%"></th>
-              <th style="width:10%"></th>
-              <th style="width:10%"></th>
+
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer>
             <tr>
               <td>{{ customer.numActivo }}</td>
-              <td>{{ customer.local }}</td>
               <td>{{ customer.marca }}</td>
+              <td>{{ customer.model }}</td>
               <td>{{ customer.country }}</td>
+              <td>{{ customer.category }}</td>
+              <td>{{ customer.v }}</td>
+              <td>{{ customer.refrigerante }}</td>
+              <td>{{ customer.capacidad }}</td>
+              <td>{{ customer.dateInstalacion }}</td>
+              <td>{{ customer.tecnicalStatus }}</td>
+              <td>{{ customer.levelPriority }}</td>
               <td>{{ customer.center.center }}</td>
+              <td>{{ customer.local }}</td>
               <td>
                 <p-button
                   [text]="true"
