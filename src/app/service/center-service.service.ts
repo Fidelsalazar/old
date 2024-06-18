@@ -31,6 +31,18 @@ export class CenterService {
       })
     );
   }
+  newCenter(center: any): Observable<any>{
+    console.log("CenterService", center)
+    return this.http.post(`${environment.apiUrl}/center`, center).pipe(
+      tap((res: any) => {
+        console.log('Datos recibidos', res);
+      }),
+      catchError((error) => {
+        console.error('Error fetching data:', error);
+        return throwError('Error al obtener los inversores');
+      })
+    );
+  }
 
   modCenter(datos: any): Observable<any> {
     const datosFormulario = {

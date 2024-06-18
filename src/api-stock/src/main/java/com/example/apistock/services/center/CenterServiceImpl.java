@@ -85,19 +85,11 @@ public class CenterServiceImpl implements CenterService{
     }
 
     @Override
-    public List<CenterDto> getAllCenter() throws  Exception{
+    public List<Center> getAllCenter() throws  Exception{
         try{
             List<CenterDto> centerList = new ArrayList<>();
 
-            centerRepository.findAll().forEach( i ->{
-                CenterDto centerDto = CenterDto.builder()
-                        .id(i.getId())
-                        .center(i.getCenter())
-                        .sitio(i.getSitio())
-                        .build();
-                centerList.add(centerDto);
-            });
-            return centerList;
+            return centerRepository.findAll();
         }catch (Exception e) {
             log.error(e.getMessage());
             throw new Exception();

@@ -1,5 +1,7 @@
 package com.example.apistock.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +16,9 @@ import java.util.UUID;
 @Entity
 @Table
 @Builder
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id")
 public class Inversor {
     @Id
     @Column(
@@ -32,6 +37,8 @@ public class Inversor {
     @Column
     private String principalUsage;
     @Column
+    private String local;
+    @Column
     private String numActivo;
     @Column
     private String marca;
@@ -40,7 +47,7 @@ public class Inversor {
     @Column
     private String country;
     @Column
-    private String cantModules;
+    private Integer cantModules;
     @Column
     private Double DC;
     @Column

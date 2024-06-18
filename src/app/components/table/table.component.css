@@ -38,6 +38,10 @@ th{
   width: 120px;
 }
 
+th[id] {
+  white-space: nowrap;
+  /* Evita que el contenido se divida en varias líneas */
+}
 
 
 

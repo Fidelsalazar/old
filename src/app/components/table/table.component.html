@@ -1,65 +1,346 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+<app-navbar></app-navbar>
 
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <!-- Center Column -->
-    <ng-container matColumnDef="center">
-      <th mat-header-cell *matHeaderCellDef> Centro </th>
-      <td mat-cell *matCellDef="let element"> {{element.center}} </td>
-    </ng-container>
-
-    <!-- Sitio Column -->
-    <ng-container matColumnDef="sitio">
-      <th mat-header-cell *matHeaderCellDef> Sitio </th>
-      <td mat-cell *matCellDef="let element"> {{element.sitio}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let center">
-        <section>
-          <div class="example-button-row">
-            <div class="example-flex-container">
-              <button
-                mat-icon-button
-                aria-label="Editar"
-                (click)="openDialog(center, 'centro')"
-                >
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button
-                mat-icon-button color="primary"
-                aria-label="Eliminar"
-                (click)="deleteCenter(center)"
-              >
-                <mat-icon>delete</mat-icon>
-              </button>
-              <button
-                mat-icon-button
-                (click)="openDialog(center, 'centro')"ç
-                disabled="true"
-              >
-                <mat-icon>open_in_new</mat-icon>
-              </button>
+<div class="card">
+    <p-toast />
+    <p-table [value]="centers" dataKey="id" [tableStyle]="{}" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+        <ng-template pTemplate="caption">
+            <div class="flex flex-wrap justify-content-end gap-2">
+                <!--<p-button label="Expand All" icon="pi pi-plus" text (onClick)="expandAll()" />-->
+                <p-button
+                  label="Colapsar Todo"
+                  icon="pi pi-minus"
+                  text
+                  (onClick)="collapseAll()"
+                />
+                <p-button
+                  type="button"
+                  icon="pi pi-plus"
+                  styleClass="p-button-text"
+                  label="Nuevo Centro"
+                  (onClick)="openDialog('create','Centro', 'new')"
+                />
             </div>
-          </div>
-        </section>
-      </mat-cell>
-    </ng-container>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 5rem"></th>
+                <th pSortableColumn="id">ID</th>
+                <th pSortableColumn="price">Centro</th>
+                <th pSortableColumn="category">Sitio</th>
+                <th pSortableColumn="rating">Paneles Solares</th>
+                <th pSortableColumn="inventoryStatus">Inversores</th>
+                <th pSortableColumn="inventoryStatus">Sistemas rectificadores</th>
+                <th pSortableColumn="inventoryStatus">Splits</th>
+                <th pSortableColumn="inventoryStatus">Aires de Ventana</th>
+                <th pSortableColumn="inventoryStatus">Presurizadores</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-expanded="expanded">
+            <tr>
+                <td>
+                    <p-button type="button" pRipple [pRowToggler]="product" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+                </td>
+                <td>{{ product.id }}</td>
+                <td>{{ product.center}}</td>
+                <td>{{ product.sitio }}</td>
+                <td>{{ product.panelSolars.length }}</td>
+                <td>{{ product.inversors.length}}</td>
+                <td>{{ product.sistemaRectificadors.length }}</td>
+                <td>{{ product.aireVentanas.length }}</td>
+                <td>{{ product.splits.length }}</td>
+                <td>{{ product.presurizadors.length }}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-product let-expanded="expanded">
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.panelSolars" dataKey="id">
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+                            <ng-template pTemplate="header">
+                              <h2>Paneles Solares</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
 
-  <mat-paginator [pageSizeOptions]="[15]"
-                 showFirstLastButtons
-  >
-  </mat-paginator>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">No tiene paneles solares</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.inversors" dataKey="id">
+
+                            <ng-template pTemplate="header">
+                              <h2>Inversores</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">There are no order for this product yet.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.sitemaRectificadors" dataKey="id">
+
+                            <ng-template pTemplate="header">
+                              <h2>Sistemas rectificadores</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">No tiene paneles solares</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.splits" dataKey="id">
+
+                            <ng-template pTemplate="header">
+                              <h2>Splits</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">No tiene paneles solares</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.aireVentanas" dataKey="id">
+
+                            <ng-template pTemplate="header">
+                              <h2>Aires de ventana</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">No tiene paneles solares</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="10">
+                    <div class="p-3">
+                        <p-table [value]="product.presurizadors" dataKey="id">
+
+                            <ng-template pTemplate="header">
+                              <h2>Presurizadores</h2>
+                                <tr>
+                                  <th style="width:25%"># Activo</th>
+                                  <th style="width:25%">Marca</th>
+                                  <th style="width:10%">Modelo</th>
+                                  <th style="width:25%">Pais</th>
+                                  <th style="width:10%">Cantidad Modulos</th>
+                                  <th style="width:10%">DC</th>
+                                  <th style="width:10%">AC</th>
+                                  <th style="width:10%">AV</th>
+                                  <th style="width:10%">Fecha Instalación</th>
+                                  <th style="width:10%">Estado técnico</th>
+                                  <th style="width:10%">Prioridad</th>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-customer>
+                                <tr>
+                                  <td>{{ customer.numActivo }}</td>
+                                  <td>{{ customer.marca }}</td>
+                                  <td>{{ customer.model }}</td>
+                                  <td>{{ customer.country }}</td>
+                                  <td>{{ customer.cantModule }}</td>
+                                  <td>{{ customer.dc }}</td>
+                                  <td>{{ customer.ac }}</td>
+                                  <td>{{ customer.va }}</td>
+                                  <td>{{ customer.dateInstalation }}</td>
+                                  <td>{{ customer.tecnicalStatus }}</td>
+                                  <td>{{ customer.priorityLevel }}</td>
+
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="6">No tiene paneles solares</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </div>
 
 

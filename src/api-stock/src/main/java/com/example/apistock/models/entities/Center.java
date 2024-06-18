@@ -2,7 +2,9 @@ package com.example.apistock.models.entities;
 
 import com.example.apistock.models.entities.grupoelectrogeno.grupo;
 import com.example.apistock.models.entities.rectifcadores.SistemaRectificador;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,6 +20,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "id")
 public class Center {
     @Id
     @Column(
@@ -38,26 +43,31 @@ public class Center {
     @Column
     private String sitio;
 
-    @OneToMany(targetEntity = Split.class)
-    @JsonIgnore
-    private List<Split> splits;
-    @JsonIgnore
-    @OneToMany(targetEntity = Inversor.class)
-    private List<Inversor> inversors;
-    @JsonIgnore
-    @OneToMany(targetEntity = PanelSolar.class)
-    private List<PanelSolar> panelSolars;
-    @JsonIgnore
-    @OneToMany(targetEntity = Presurizador.class)
-    private List<Presurizador> presurizadors;
-    @JsonIgnore
-    @OneToMany(targetEntity = AireVentana.class)
-    private List<AireVentana> aireVentanas;
-    @JsonIgnore
-    @OneToMany(targetEntity = SistemaRectificador.class)
-    private List<SistemaRectificador> sistemaRectificadors;
-    @JsonIgnore
-    @OneToMany(targetEntity = grupo.class)
-    private List<grupo> grupos;
+  @OneToMany(targetEntity = Split.class, mappedBy = "center")
+  private List<Split> splits;
 
+  @OneToMany(
+    targetEntity = Inversor.class,
+    mappedBy = "center",
+    cascade = {
+      CascadeType.MERGE,
+      CascadeType.PERSIST
+    }
+  )
+  private List<Inversor> inversors;
+
+  @OneToMany(targetEntity = PanelSolar.class, mappedBy = "center")
+  private List<PanelSolar> panelSolars;
+
+  @OneToMany(targetEntity = Presurizador.class, mappedBy = "center")
+  private List<Presurizador> presurizadors;
+
+  @OneToMany(targetEntity = AireVentana.class, mappedBy = "center")
+  private List<AireVentana> aireVentanas;
+
+  @OneToMany(targetEntity = SistemaRectificador.class, mappedBy = "center")
+  private List<SistemaRectificador> sistemaRectificadors;
+
+  @OneToMany(targetEntity = grupo.class, mappedBy = "center")
+  private List<grupo> grupos;
 }

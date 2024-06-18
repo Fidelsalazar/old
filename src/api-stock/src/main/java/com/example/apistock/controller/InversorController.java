@@ -63,4 +63,14 @@ public class InversorController {
       HttpStatus.OK
     );
   }
+
+  @DeleteMapping("/delete/{id}")
+  public ResponseEntity<String> delete(
+    @PathVariable UUID id
+  )throws Exception{
+    return  new ResponseEntity<>(
+      inversorService.delete(id),
+      HttpStatus.OK
+    );
+  }
 }

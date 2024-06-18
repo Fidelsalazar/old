@@ -115,6 +115,8 @@ public class InversorServiceImpl implements InversorService{
           .tecnicalStatus(i.getTecnicalStatus())
           .priorityLevel(i.getPriorityLevel())
           .principalUsage(i.getPrincipalUsage())
+          .center(i.getCenter())
+          .local(i.getLocal())
           .build();
 
         inversorDtoList.add(inversorDto);
@@ -166,5 +168,17 @@ public class InversorServiceImpl implements InversorService{
     existingInversor.setPriorityLevel(inversorDto.getPriorityLevel());
 
     return existingInversor;
+  }
+
+  @Override
+  public String delete(UUID id) throws Exception {
+    try{
+      inversorRepository.deleteById(id);
+      return null ;
+    }catch(Exception e) {
+      log.error(e.getMessage());
+      throw new Exception();
+    }
+
   }
 }

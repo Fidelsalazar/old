@@ -18,4 +18,6 @@ public interface InversorService {
   List<InversorDto> getAllInversor() throws  Exception;
 
   InversorDto getInversorForId(UUID id) throws Exception;
+
+    String delete(UUID id) throws Exception;
 }

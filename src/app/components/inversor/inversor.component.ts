@@ -1,23 +1,22 @@
-import { Component } from '@angular/core';
-import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
-import { AireService } from '../../service/aire-service.service';
+import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { AireService } from '../../service/aire-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { SplitService } from '../../service/split-service.service';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { InversorService } from '../../service/inversor.service';
 
 @Component({
-    selector: 'app-split',
+    selector: 'app-inversor',
     standalone: true,
-    providers: [SplitService],
-    templateUrl: './split.component.html',
-    styleUrl: './split.component.css',
+    providers: [InversorService],
+    templateUrl: './inversor.component.html',
+    styleUrl: './inversor.component.css',
     imports: [
         TableModule,
         CommonModule,
@@ -27,7 +26,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
         NavbarComponent
     ]
 })
-export class SplitComponent {
+export class InversorComponent {
   customers: any[] = [];
   items: MenuItem[] = [];
 
@@ -35,10 +34,10 @@ export class SplitComponent {
 
   rows = 10;
 
-  constructor(private aireService: SplitService, private dialog: MatDialog) {}
+  constructor(private inversorService: InversorService, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.getAire();
+    this.getInversor();
     this.items = [
       {
         label: 'New',
@@ -51,33 +50,32 @@ export class SplitComponent {
     ];
   }
 
-  getAire(): void {
-    this.aireService.getAllSplits().subscribe({
-      next: (response) => {
+  getInversor(): void {
+    this.inversorService.getAllInversor().subscribe({
+      next: (response: any[]) => {
         this.customers = response;
         console.log('Recibido en componente Tabla', response);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching data:', error);
       },
     });
   }
 
   openDialog(data: any, template: string, action: string): void {
-    console.log('Editar centro:', data, template);
+    console.log('Editar Inversor:', data, template);
 
     let content: any;
 
-    if (template === 'Split') {
-      switch(action){
+    if (template === 'Inversor') {
+      switch (action) {
         case 'edit':
-          content = 'editarSplit';
+          content = 'editarInversor';
           break;
         case 'new':
-          content = 'newSplit';
+          content = 'newInversor';
           break;
       }
-
     }
 
     const dialogRef = this.dialog.open(EditDialogComponent, {
@@ -90,18 +88,18 @@ export class SplitComponent {
     });
 
     dialogRef.componentInstance.modificationSuccess.subscribe(() => {
-      this.getAire(); // Actualizar la tabla después de una modificación exitosa
+      this.getInversor(); // Actualizar la tabla después de una modificación exitosa
     });
   }
 
   deleteAire(id: any): void {
     console.log(id.id);
-    this.aireService.deleteAire(id.id).subscribe({
-      next: (data) => {
+    this.inversorService.deleteInversor(id.id).subscribe({
+      next: (data: any) => {
         console.log(data);
-        this.getAire();
+        this.getInversor();
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching data:', error);
       },
     });
@@ -116,6 +114,7 @@ export class SplitComponent {
   }
 
   reset() {
+    this.getInversor();
     this.first = 0;
   }
 

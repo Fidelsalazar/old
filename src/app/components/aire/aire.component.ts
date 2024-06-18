@@ -8,20 +8,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { PrimeIcons, MenuItem } from 'primeng/api';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
-  selector: 'app-split',
-  standalone: true,
-  imports: [
-    TableModule,
-    CommonModule,
-    ButtonModule,
-    MatIconModule,
-    HttpClientModule,
-  ],
-  providers: [AireService],
-  templateUrl: './aire.component.html',
-  styleUrl: './aire.component.css',
+    selector: 'app-split',
+    standalone: true,
+    providers: [AireService],
+    templateUrl: './aire.component.html',
+    styleUrl: './aire.component.css',
+    imports: [
+        TableModule,
+        CommonModule,
+        ButtonModule,
+        MatIconModule,
+        HttpClientModule,
+        NavbarComponent
+    ]
 })
 export class AireComponent {
   customers: any[] = [];

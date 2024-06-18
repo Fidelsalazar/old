@@ -20,7 +20,7 @@ public class InversorDto {
   private String marca;
   private String model;
   private String country;
-  private String cantModules;
+  private Integer cantModules;
   private Double DC;
   private Double AC;
   private Double VA;
@@ -28,6 +28,7 @@ public class InversorDto {
   private String tecnicalStatus;
   private Integer priorityLevel;
   private  Center center;
+  private String local;
 
   public InversorDto(String numActivo, String marca, String model) {
   }

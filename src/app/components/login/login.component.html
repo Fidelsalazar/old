@@ -1,0 +1,40 @@
+<form class="login-form"
+  [formGroup] = "loginForm"
+  (ngSubmit)="onLogin()">
+  <p class="login-text">
+    <span class="fa-stack fa-lg">
+      <img
+        class="img-redonda"
+        src="../../../assets/th (3).jpeg"
+        alt=""
+      >
+    </span>
+  </p>
+  <br/><br/>
+  <h1>
+    Sistema de Gestion
+  </h1>
+  <h1>
+    <span class="second-title">Activos Fijos Eneréticos</span>
+  </h1>
+
+  <br/>
+  <input
+    type="email"
+    class="login-username"
+    autofocus="true"
+    required="true"
+    formControlName="email"
+    placeholder="Email" />
+  <input
+    type="password"
+    class="login-password"
+    required="true"
+    placeholder="Password"
+    formControlName="pass"
+  />
+  <input type="submit" name="Login" value="Login" class="login-submit" />
+</form>
+<!--<a href="#" class="login-forgot-pass">forgot password?</a>-->
+<div class="underlay-photo"></div>
+<div class="underlay-black"></div>

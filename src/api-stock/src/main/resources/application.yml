@@ -22,3 +22,13 @@ management:
           - healt
           - mappings
 
+---
+spring:
+  application:
+    name: api-stock
+  profile:
+    prod
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/stock
+    username: postgres
+    password: postgres

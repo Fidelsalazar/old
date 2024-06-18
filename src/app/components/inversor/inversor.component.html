@@ -1,4 +1,5 @@
 <app-navbar></app-navbar>
+
 <div class="mb-3">
     <p-button
         type="button"
@@ -32,21 +33,19 @@
     >
         <ng-template pTemplate="header">
             <tr>
-              <th style="width:20%"># Activo</th>
-              <th style="width:20%">Marca</th>
-              <th style="width:20%">Pais</th>
-              <th style="width:10%">Categoria</th>
-              <th style="width:10%">Modelo Interior</th>
-              <th style="width:10%">Modelo Exterior</th>
-              <th style="width:10%">V</th>
-              <th style="width:10%">Fases</th>
-              <th style="width:10%">Refrigerante</th>
-              <th style="width:10%">Capacidad</th>
-              <th style="width:10%">Fecha Instalacion</th>
-              <th style="width:10%">Estado Técnico</th>
+              <th style="width:25%"># Activo</th>
+              <th style="width:25%">Marca</th>
+              <th style="width:10%">Modelo</th>
+              <th style="width:25%">Pais</th>
+              <th style="width:10%">Cantidad Modulos</th>
+              <th style="width:10%">DC</th>
+              <th style="width:10%">AC</th>
+              <th style="width:10%">AV</th>
+              <th style="width:10%">Fecha Instalación</th>
+              <th style="width:10%">Estado técnico</th>
               <th style="width:10%">Prioridad</th>
-              <th style="width:20%">Centro</th>
-              <th style="width:20%">Local</th>
+              <th style="width:25%">Centro</th>
+              <th style="width:25%">Local</th>
 
             </tr>
         </ng-template>
@@ -54,23 +53,21 @@
             <tr>
               <td>{{ customer.numActivo }}</td>
               <td>{{ customer.marca }}</td>
+              <td>{{ customer.model }}</td>
               <td>{{ customer.country }}</td>
-              <td>{{ customer.categoria }}</td>
-              <td>{{ customer.modeloInterior }}</td>
-              <td>{{ customer.modeloExterior }}</td>
-              <td>{{ customer.v }}</td>
-              <td>{{ customer.fases }}</td>
-              <td>{{ customer.refrigerante }}</td>
-              <td>{{ customer.capacidad }}</td>
-              <td>{{ customer.fechaInstalacion }}</td>
-              <td>{{ customer.estadoTecnico }}</td>
-              <td>{{ customer.prioridad }}</td>
-              <td>{{ customer.centro }}</td>
+              <td>{{ customer.cantModule }}</td>
+              <td>{{ customer.dc }}</td>
+              <td>{{ customer.ac }}</td>
+              <td>{{ customer.va }}</td>
+              <td>{{ customer.dateInstalation }}</td>
+              <td>{{ customer.tecnicalStatus }}</td>
+              <td>{{ customer.priorityLevel }}</td>
+              <td>{{ customer.center.center }}</td>
               <td>{{ customer.local }}</td>
               <td>
                 <p-button
                   [text]="true"
-                  (onClick)="openDialog(customer, 'Split', 'edit')"
+                  (onClick)="openDialog(customer, 'Inversor', 'create')"
                 >
                   <span class="pi pi-pencil"></span>
                 </p-button>
@@ -86,7 +83,7 @@
               <td>
                 <p-button
                   [text]="true"
-                  (onClick)="openDialog(customer, 'Split', 'expand')"
+                  (onClick)="openDialog(customer, 'Inversor','edit')"
                 >
                   <span class="pi pi-expand"></span>
                 </p-button>
@@ -98,7 +95,7 @@
               type="button"
               icon="pi pi-plus"
               styleClass="p-button-text"
-              (onClick)="openDialog('create', 'Split', 'new')"
+              (onClick)="openDialog('create','Inversor', 'new')"
             />
         </ng-template>
         <ng-template pTemplate="paginatorright">
@@ -106,4 +103,3 @@
         </ng-template>
     </p-table>
 </div>
-

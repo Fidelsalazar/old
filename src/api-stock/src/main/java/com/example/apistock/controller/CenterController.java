@@ -1,6 +1,7 @@
 package com.example.apistock.controller;
 
 import com.example.apistock.models.dto.CenterDto;
+import com.example.apistock.models.entities.Center;
 import com.example.apistock.services.center.CenterService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class CenterController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<CenterDto>> getAllCenter() throws Exception{
+    public ResponseEntity<List<Center>> getAllCenter() throws Exception{
         return new ResponseEntity<>(
                 centerService.getAllCenter(),
                 HttpStatus.OK
